@@ -1,0 +1,2 @@
+module Fungoid.Stack where
+
