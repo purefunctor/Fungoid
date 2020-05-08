@@ -1,7 +1,7 @@
 module Fungoid.Torus
   ( Coord
   , Space
-  , Torus
+  , Torus(..)
   , mkTorus
   , asTorus
   , torusGet
