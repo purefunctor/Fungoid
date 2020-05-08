@@ -10,6 +10,7 @@ module Fungoid.Torus
   )
 where
 
+
 import Data.Word ( Word8 )
 
 import Data.ByteString ( ByteString )
