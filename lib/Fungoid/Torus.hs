@@ -38,7 +38,7 @@ data Torus a = Torus
 
 -- Primary constructor for building a Torus type.
 mkTorus :: (Integral a) => Coord a -> Coord a -> Torus a
-mkTorus xb yb = Torus (Map.fromList []) xb yb
+mkTorus = Torus (Map.fromList [])
 
 
 -- Secondary constructor for building a Torus type
