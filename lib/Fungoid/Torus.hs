@@ -44,8 +44,8 @@ mkTorus = Torus (Map.fromList [])
 
 -- Secondary constructor for building a Torus type
 -- from the contents of a ByteString.
-asTorus :: (Integral a) => ByteString -> Torus a -> Torus a
-asTorus b t = t {space = s}
+asTorus :: (Integral a) => Torus a -> ByteString -> Torus a
+asTorus t b = t {space = s}
  where
   w = B.unpack <$> C.lines b
   s = Map.fromList [ ((x, y), v)
