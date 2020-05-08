@@ -3,14 +3,18 @@ module Fungoid.Torus
   , Space
   , Torus
   , mkTorus
+  , asTorus
   , torusGet
   , torusSet
   , inBounds
   )
 where
 
-
 import Data.Word ( Word8 )
+
+import Data.ByteString ( ByteString )
+import qualified Data.ByteString as B
+import qualified Data.ByteString.Char8 as C
 
 import Data.Map ( Map )
 import qualified Data.Map as Map
@@ -35,6 +39,18 @@ data Torus a = Torus
 -- Primary constructor for building a Torus type.
 mkTorus :: (Integral a) => Coord a -> Coord a -> Torus a
 mkTorus xb yb = Torus (Map.fromList []) xb yb
+
+
+-- Secondary constructor for building a Torus type
+-- from the contents of a ByteString.
+asTorus :: (Integral a) => ByteString -> Torus a -> Torus a
+asTorus b t = t {space = s}
+ where
+  w = B.unpack <$> C.lines b
+  s = Map.fromList [ ((x, y), v)
+                   | (x, r) <- zip [0 ..] w
+                   , (y, v) <- zip [0 ..] r
+                   ]
 
 
 -- `get` operation for the Torus type.
