@@ -1,5 +1,5 @@
 module Fungoid.Machine
-  ( Direction
+  ( Direction(..)
   , Machine(..)
   , mkMachine
   )
