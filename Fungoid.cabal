@@ -14,7 +14,8 @@ extra-source-files:  CHANGELOG.md, README.md
 
 
 library
-  exposed-modules:     Fungoid.Machine,
+  exposed-modules:     Fungoid.Instructions,
+                       Fungoid.Machine,
                        Fungoid.Stack,
                        Fungoid.Torus
   -- other-modules:
