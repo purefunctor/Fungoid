@@ -1,4 +1,16 @@
-module Fungoid.Interpreter93 where
+module Fungoid.Interpreter93
+  ( Instruction93
+  , Evaluation93
+  , Machine93
+  , buildMachine
+  , strModeInstruction
+  , normalInstruction
+  , perform
+  , interpret
+  , run
+  )
+where
+
 
 import Data.ByteString ( ByteString )
 import Data.Char ( chr )
