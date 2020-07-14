@@ -159,11 +159,11 @@ sStore :: (Integral a) => Word8 -> Instruction a ()
 sStore w = do
   m <- get
 
-  case strMode m of
-    True  -> sPush $ fromIntegral w
-    False -> if w >= 48 && w <= 57
-             then sPush $ fromIntegral $ w - 48
-             else throwError ("sStore: Invalid Character.", m)
+  if strMode m
+    then sPush $ fromIntegral w
+    else if w >= 48 && w <= 57
+           then sPush $ fromIntegral $ w - 48
+           else throwError ("sStore: Invalid Character.", m)
 
 
 -- DIRECTION INSTRUCTIONS
@@ -230,9 +230,9 @@ ioPutChar = do
   m <- get
   n <- sPop
 
-  case n >= 0 && n <= 127 of
-    True  -> liftIO . putChar . chr . fromIntegral $ n
-    False -> throwError ("ioPutChar: Invalid ASCII Value.", m)
+  if n >= 0 && n <= 127
+    then liftIO . putChar . chr . fromIntegral $ n
+    else throwError ("ioPutChar: Invalid ASCII Value.", m)
 
 
 -- '&'
@@ -241,10 +241,10 @@ ioGetInt = do
   m <- get
   s <- liftIO getLine
 
-  case all isDigit s of
-    True  -> sPush $ read s
-    False -> throwError ("ioGetInt: Expecting Integer Input.", m)
-
+  if all isDigit s
+    then sPush $ read s
+    else throwError ("ioGetInt: Expecting Integer Input.", m)
+  
 
 -- '~'
 ioGetChar :: (Integral a) => Instruction a ()
@@ -252,10 +252,10 @@ ioGetChar = do
   m <- get
   s <- liftIO getLine
 
-  case length s == 1 of
-    True  -> sPush . fromIntegral . ord . head $ s
-    False -> throwError ("ioGetChar: Expecting Single ASCII Character.", m)
 
+  if length s == 1
+    then sPush . fromIntegral . ord . head $ s
+    else throwError ("ioGetChar: Expecting Single ASCII Character.", m)
 
 -- 'p'
 tPut :: (Integral a) => Instruction a ()
@@ -270,11 +270,10 @@ tPut = do
 
   let t = torus m1
 
-  case inBounds (x, y) t && v >= 0 && v <= 127 of
-    True  -> let t' = torusSet (x, y) (fromIntegral v) t
-             in put $ m1 {torus = t'}
-
-    False -> throwError ("tPut: Out Of Bounds.", m0)
+  if inBounds (x, y) t && v >= 0 && v <= 127
+    then let t' = torusSet (x, y) (fromIntegral v) t
+         in put $ m1 {torus = t'}
+    else throwError ("tPut: Out Of Bounds.", m0)
 
 
 -- 'g'

@@ -18,7 +18,7 @@ mkStack = []
 
 -- Pushes an item to the stack.
 push :: (Integral a) => a -> Stack a -> Stack a
-push n ns = (n : ns)
+push n ns = n : ns
 
 
 -- Pops an item from the stack.

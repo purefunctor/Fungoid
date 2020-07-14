@@ -58,7 +58,7 @@ strModeInstruction w = if c == '"' then mFlip else sStore w
 -- Interprets a given Word8 in Normal mode.
 normalInstruction :: Word8 -> Instruction93 ()
 normalInstruction w =
-  case (chr $ fromEnum w) of
+  case chr $ fromEnum w of
     '+'  -> sAdd
     '*'  -> sMul
     '-'  -> sSub
@@ -100,13 +100,13 @@ perform f = do
   let s = strMode m
   let c = chr $ fromEnum w
 
-  case s of
-    True  -> strModeInstruction w
-    False -> normalInstruction w
+  if s
+    then strModeInstruction w
+    else normalInstruction w
 
-  case f of
-    True  -> unless (c == '@') (pMove >> perform f)
-    False -> unless (c == '@') pMove
+  if f
+    then unless (c == '@') (pMove >> perform f)
+    else unless (c == '@') pMove
 
 
 -- Interprets the entire program.
