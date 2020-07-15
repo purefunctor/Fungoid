@@ -14,6 +14,6 @@ This project requires `GHC 8.6.5` and can be built using either `cabal` or `stac
 # Examples
 In order to run examples obtained from the [esolangs wiki](https://esolangs.org/wiki/Befunge):
 ```bash
-λ> [cabal | stack] run Fungoid -- b93\helloworld.b93 93
-λ> [cabal | stack] run Fungoid -- b93\factorial.b93 93
+λ> [cabal | stack] run Fungoid -- b93/helloworld.b93 93
+λ> [cabal | stack] run Fungoid -- b93/factorial.b93 93
 ```
