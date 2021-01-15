@@ -17,3 +17,11 @@ In order to run examples obtained from the [esolangs wiki](https://esolangs.org/
 λ> [cabal | stack] run Fungoid -- b93/helloworld.b93 93
 λ> [cabal | stack] run Fungoid -- b93/factorial.b93 93
 ```
+
+# Nix
+Alternatively, it can also be built using `nix`.
+```bash
+λ> nix build
+λ> ./result/bin/Fungoid b93/helloworld.b93 93
+λ> ./result/bin/Fungoid b93/factorial.b93 93
+```
