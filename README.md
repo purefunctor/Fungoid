@@ -2,7 +2,7 @@
 Befunge-93 interpreter written in Haskell!
 
 # Requirements
-This project requires `GHC 8.6.5` and can be built using either `cabal` or `stack`.
+This project requires `GHC 8.8.4` and can be built using either `cabal` or `stack`.
 
 # Installation
 ```bash
