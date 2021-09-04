@@ -22,4 +22,4 @@ jobs:
     - name: Build Project
       run: |
         docker run -tv $PWD:/mnt utdemir/ghc-musl:v20-ghc8104 \
-        /bin/bash -c 'cd /mnt && cabal update && cabal install --enable-executable-static --installdir=build && ldd build/Fungoid'
+        /bin/bash -c 'cd /mnt && cabal update && cabal install --constraint='bytestring +integer-simple' ''--enable-executable-static --installdir=build && ldd build/Fungoid'
