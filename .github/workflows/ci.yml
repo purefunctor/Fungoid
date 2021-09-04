@@ -16,11 +16,10 @@ jobs:
       with:
         ghc-version: "8.10.4"
 
+    - name: Install Docker
+      uses: docker/setup-buildx-action@v1
+
     - name: Build Project
       run: |
-        cabal update
-        cabal install --enable-executable-static --installdir=build
-
-    - name: Debugging
-      run: |
-        ldd build/Fungoid
+        docker run -tv $PWD:/mnt utdemir/ghc-musl:v20-ghc8104 \
+        /bin/bash -c 'cd /mnt && cabal update && cabal install --enable-executable-static --installdir=build && ldd build/Fungoid'
