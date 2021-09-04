@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Build (Static)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Haskell
+      uses: haskell/actions/setup@v1
+      with:
+        ghc-version: "8.10.4"
+
+    - name: Build Project
+      run: |
+        stack update
+        stack build \
+         --ghc-options '-static -optl-static -optl-pthread -fPIC' \
+         --docker --docker-image "utdemir/ghc-musl:v20-ghc8104" \
+         --no-nix --copy-bins
+
+    - name: Debugging
+      run: |
+        ldd build/Fungoid
