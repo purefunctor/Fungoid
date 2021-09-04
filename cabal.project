@@ -1,0 +1,4 @@
+ignore-project: False
+
+package bytestring
+  flags: +integer-simple
