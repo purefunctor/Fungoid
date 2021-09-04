@@ -18,7 +18,7 @@ import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as C
 
 import Data.Map ( Map )
-import qualified Data.Map as Map
+import qualified Data.Map.Strict as Map
 
 
 -- Represents coordinates used in the Torus space.
@@ -39,7 +39,7 @@ data Torus a = Torus
 
 -- Primary constructor for building a Torus type.
 mkTorus :: (Integral a) => Coord a -> Coord a -> Torus a
-mkTorus = Torus (Map.fromList [])
+mkTorus = Torus Map.empty
 
 
 -- Secondary constructor for building a Torus type

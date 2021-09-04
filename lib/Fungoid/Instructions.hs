@@ -110,7 +110,7 @@ sDiscard = void sPop
 
 -- Perform a unary function on one item popped from the stack
 sUnary :: (Integral a) => (a -> a) -> Instruction a ()
-sUnary f = f <$> sPop >>= sPush
+sUnary f = sPop >>= sPush . f
 
 
 -- Perform a binary function on two items popped from the stack
@@ -244,7 +244,7 @@ ioGetInt = do
   if all isDigit s
     then sPush $ read s
     else throwError ("ioGetInt: Expecting Integer Input.", m)
-  
+
 
 -- '~'
 ioGetChar :: (Integral a) => Instruction a ()
