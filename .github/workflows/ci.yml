@@ -18,11 +18,8 @@ jobs:
 
     - name: Build Project
       run: |
-        stack update
-        stack build \
-         --ghc-options '-static -optl-static -optl-pthread -fPIC' \
-         --docker --docker-image "utdemir/ghc-musl:v20-ghc8104" \
-         --no-nix --copy-bins
+        cabal update
+        cabal install --enable-executable-static --installdir=build
 
     - name: Debugging
       run: |
